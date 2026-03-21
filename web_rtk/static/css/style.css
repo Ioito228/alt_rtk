@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+:root {
+    --rt-purple: #7700FF;
+    --rt-orange: #FF4F12;
+    --rt-dark: #1A1A2E;
+    --rt-light-bg: #F3F5F9;
+    --white: #FFFFFF;
+    --glass: rgba(255, 255, 255, 0.95);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: 
+        radial-gradient(circle at 0% 0%, rgba(119, 0, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(255, 79, 18, 0.08) 0%, transparent 40%),
+        var(--rt-light-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    animation: cardAppear 0.6s ease-out forwards;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 30px 20px;
+        border-radius: 24px;
+    }
+    .rtk-logo {
+        font-size: 26px;
+    }
+    input {
+        padding: 14px;
+        font-size: 14px;
+    }
+    .btn {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+
+.rtk-logo {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    background: linear-gradient(135deg, var(--rt-purple) 0%, var(--rt-orange) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: var(--rt-dark);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border: 2px solid #E8EAF0;
+    border-radius: 18px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #F9FAFF;
+    color: var(--rt-dark);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--rt-purple);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(119, 0, 255, 0.1);
+    outline: none;
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--rt-purple) 0%, #5C00C7 100%);
+    color: var(--white);
+    border: none;
+    padding: 18px;
+    border-radius: 20px;
+    width: 100%;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 10px 25px -5px rgba(119, 0, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(119, 0, 255, 0.5);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-orange {
+    background: linear-gradient(135deg, var(--rt-orange) 0%, #D43D0B 100%);
+    box-shadow: 0 10px 25px -5px rgba(255, 79, 18, 0.3);
+}
+
+.btn-orange:hover {
+    box-shadow: 0 15px 30px -5px rgba(255, 79, 18, 0.4);
+}
+
+.admin-badge {
+    background: #F0E6FF;
+    color: var(--rt-purple);
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+#qr-image {
+    background: var(--white);
+    padding: 15px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin: 25px auto;
+    width: 240px;
+    display: block;
+    border: 1px solid #F0F0F0;
+}
+
+#timer {
+    font-weight: 600;
+    color: var(--rt-orange);
+    background: #FFF5F1;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+a {
+    color: #8E94A5;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--rt-purple);
+}
+
+#reader {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#sc-res {
+    border-radius: 20px;
+    animation: cardAppear 0.3s ease-out;
+}
+
+.blur-effect {
+    filter: blur(20px);
+    transition: filter 0.5s;
+}

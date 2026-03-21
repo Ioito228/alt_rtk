@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="/css/style.css"></head>
+<body><div class="card"><div class="rtk-logo">Ростелеком</div><h3>Регистрация</h3>
+<form id="f"><input name="full_name" placeholder="ФИО" required><input name="position" placeholder="Должность" required><input name="username" placeholder="Логин" required><input type="password" name="password" placeholder="Пароль" required><button class="btn">Создать профиль</button></form>
+<p style="margin-top:15px"><a href="/login.html">Уже есть аккаунт?</a></p></div>
+<script>document.getElementById('f').onsubmit = async (e) => { e.preventDefault(); await fetch('/api/register', {method:'POST', body:new FormData(e.target)}); location.href='/login.html'; };</script>
+</body></html>

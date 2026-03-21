@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <title>Сканер СКУД | РТК</title>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/style.css?v=3">
+</head>
+</head>
+<body>
+    <div class="card">
+        <div class="rtk-logo">Ростелеком</div>
+        <div class="admin-badge">Режим охраны</div>
+        
+        <div id="reader" style="width: 100%; border-radius:20px; overflow:hidden; background:#000; margin-bottom:15px;"></div>
+        
+        <div id="sc-res" style="display:none; padding:20px; border-radius:18px; margin-top:15px; font-weight:700; border: 2px solid transparent;"></div>
+        
+        <button id="next-btn" class="btn" style="display:none" onclick="location.reload()">СЛЕДУЮЩИЙ</button>
+
+        <div style="margin-top:25px; border-top:1px solid #EEE; padding-top:20px;">
+            <p style="font-size:12px; color:#888; margin-bottom:10px;">РУЧНОЙ ВВОД КОДА:</p>
+            <input type="text" id="manual" placeholder="RTK_PASS|ID:...">
+            <button onclick="manualCheck()" class="btn btn-orange">ПРОВЕРИТЬ ВРУЧНУЮ</button>
+        </div>
+        
+        <p style="margin-top:20px;"><a href="/admin.html">← В панель управления</a></p>
+    </div>
+
+    <script>
+        const html5QrCode = new Html5Qrcode("reader");
+        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+        html5QrCode.start(
+            { facingMode: "environment" }, 
+            config, 
+            (decodedText) => {
+                html5QrCode.stop().then(() => {
+                    verify(decodedText);
+                });
+            }
+        ).catch(err => {
+            console.error("Камера не запущена:", err);
+            document.getElementById('reader').innerHTML = `
+                <div style="padding:20px; font-size:12px; color:#666;">
+                    Камера недоступна.<br>Используйте ручной ввод или проверьте HTTPS.
+                </div>`;
+        });
+
+        async function verify(text) {
+            if (!text) return;
+
+            const fd = new FormData();
+            fd.append('qr_data', text);
+
+            try {
+                const res = await fetch('/api/verify_qr', { method: 'POST', body: fd });
+                const data = await res.json();
+                
+                const out = document.getElementById('sc-res');
+                const nextBtn = document.getElementById('next-btn');
+                
+                out.style.display = "block";
+                nextBtn.style.display = "block";
+
+                if (data.status === "success") {
+                    out.style.background = "#E6FFED";
+                    out.style.color = "#155724";
+                    out.style.borderColor = "#B7EB8F";
+                    out.innerHTML = `✅ ДОСТУП РАЗРЕШЕН<br><span style="font-size:1.2em">${data.name}</span><br><small>${data.position}</small>`;
+                } else {
+                    out.style.background = "#FFF1F0";
+                    out.style.color = "#CF1322";
+                    out.style.borderColor = "#FFA39E";
+                    out.innerHTML = `❌ ОТКАЗАНО<br><span style="font-size:0.9em">${data.message}</span>`;
+                }
+            } catch (e) {
+                alert("Ошибка связи с сервером");
+            }
+        }
+
+        function manualCheck() {
+            const val = document.getElementById('manual').value;
+            if(val) verify(val);
+        }
+    </script>
+</body>
+</html>

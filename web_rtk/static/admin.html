@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"><link rel="stylesheet" href="/css/style.css"><title>Админ | RTK</title>
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/style.css?v=3">
+</head>
+</head>
+<body>
+    <div class="card">
+        <div class="rtk-logo">Ростелеком</div>
+        <div class="admin-badge">Панель управления охраной</div>
+        <h3>Регистрация сотрудника</h3>
+        <form id="rF">
+            <input name="full_name" placeholder="ФИО сотрудника" required>
+            <input name="position" placeholder="Должность" required>
+            <input name="username" placeholder="Логин" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button class="btn">ВНЕСТИ В БАЗУ</button>
+        </form>
+        <button onclick="location.href='/scanner.html'" class="btn" style="background:var(--rt-orange); box-shadow:0 8px 20px rgba(255,79,18,0.2)">ОТКРЫТЬ СКАНЕР</button>
+        <p style="margin-top:20px"><a href="#" onclick="localStorage.clear(); location.href='/login.html'" style="color:red">Выйти</a></p>
+    </div>
+    <script>
+        const u = JSON.parse(localStorage.getItem('user'));
+        if(!u || !u.is_admin) location.href='/login.html';
+
+        document.getElementById('rF').onsubmit = async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            fd.append('admin_id', u.id);
+            const res = await fetch('/api/register', { method: 'POST', body: fd });
+            if (res.ok) { alert("Сотрудник успешно добавлен!"); e.target.reset(); }
+            else { alert("Ошибка регистрации"); }
+        };
+    </script>
+</body>
+</html>

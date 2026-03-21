@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css?v=2"><title>Мой пропуск</title>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/style.css?v=3">
+</head>
+</head>
+<body>
+    <div class="card">
+        <div class="rtk-logo">Ростелеком</div>
+        <h3 id="n"></h3>
+        <p id="p" style="color:gray; margin-top:-15px; margin-bottom:20px"></p>
+        <img id="qr-image" class="hidden">
+        <p id="timer"></p>
+        <button onclick="generateQR()" class="btn">СОЗДАТЬ ПРОПУСК</button>
+        <p style="margin-top:25px"><a href="#" onclick="localStorage.clear(); location.href='/login.html'" style="color:gray">Выйти из системы</a></p>
+    </div>
+    <script src="/js/app.js"></script>
+    <script>
+        const u = JSON.parse(localStorage.getItem('user'));
+        if(!u) location.href='/login.html';
+        document.getElementById('n').innerText = u.full_name;
+        document.getElementById('p').innerText = u.position;
+    </script>
+</body>
+</html>

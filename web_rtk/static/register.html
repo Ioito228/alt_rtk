@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Ростелеком</title>
+    <link rel="stylesheet" href="/css/style.css?v=2">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/style.css?v=3">
+</head>
+</head>
+<body>
+    <div class="card">
+        <div class="rtk-logo">Ростелеком</div>
+        <form id="regForm">
+            <input type="text" name="full_name" placeholder="ФИО" required>
+            <input type="text" name="position" placeholder="Должность" required>
+            <input type="text" name="username" placeholder="Логин" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit" class="btn">Зарегистрироваться</button>
+        </form>
+        <p style="margin-top:15px;"><a href="/login.html">Уже есть аккаунт?</a></p>
+    </div>
+    <script>
+        document.getElementById('regForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const res = await fetch('/api/register', { method: 'POST', body: new FormData(e.target) });
+            if (res.ok) { window.location.href = '/login.html'; } else { alert("Ошибка регистрации"); }
+        };
+    </script>
+</body>
+</html>

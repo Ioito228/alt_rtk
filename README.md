@@ -7,7 +7,7 @@
 ## 🚀 Быстрый доступ (Демо)
 
 *   **🌐 Веб-версия (Панель СКУД):** [Перейти к сайту](https://respondent-defensive-cables-metal.trycloudflare.com/login.html)
-*   **📱 Мобильное приложение (Android):** [**СКАЧАТЬ GATE.APK**](https://github.com/loito228/alt_rtk/releases/download/apk/gate.apk)
+*   **📱 Мобильное приложение (Android):** [**СКАЧАТЬ GATE.APK**](https://github.com/Ioito228/alt_rtk/releases/download/apk/gate.apk)
 
 > **Логины для теста:**
 > *   `admin` / `admin` (Охрана / Администратор)
